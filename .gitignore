@@ -1,0 +1,10 @@
+# NetBeans project metadata
+TalentWiz/nbproject/private/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
+
+# Local config overrides (if you split DB creds out later)
+TalentWiz/include/settings.local.php
