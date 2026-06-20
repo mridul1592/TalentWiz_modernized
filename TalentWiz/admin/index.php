@@ -29,7 +29,6 @@
     }
     ?>
     </div>
-</div>
 <?php //Content Area End ?>
 
 <?php include_once '../include/footer.php'; ?>

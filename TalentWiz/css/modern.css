@@ -1,0 +1,265 @@
+/* =====================================================================
+   TalentWiz — Modern theme layer (2025)
+   Sits on top of Bootstrap 5. Restyles both the new shared chrome
+   (header / navbar / footer) AND the legacy page markup (tables, forms,
+   .pageHeader, .content, .tblStyle ...) so existing pages look modern
+   without being edited.
+   ===================================================================== */
+
+:root {
+    --tw-primary:   #2563eb;   /* blue 600  */
+    --tw-primary-d: #1d4ed8;   /* blue 700  */
+    --tw-accent:    #f59e0b;   /* amber 500 */
+    --tw-success:   #16a34a;
+    --tw-danger:    #dc2626;
+    --tw-ink:       #1e293b;   /* slate 800 */
+    --tw-muted:     #64748b;   /* slate 500 */
+    --tw-bg:        #f1f5f9;   /* slate 100 */
+    --tw-card:      #ffffff;
+    --tw-border:    #e2e8f0;   /* slate 200 */
+    --tw-radius:    .75rem;
+    --tw-shadow:    0 1px 3px rgba(15,23,42,.08), 0 8px 24px rgba(15,23,42,.06);
+}
+
+/* ----- Base ----------------------------------------------------------- */
+html, body {
+    height: 100%;
+}
+body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: var(--tw-ink) !important;
+    background: var(--tw-bg) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* The legacy layout used a full-page <table id="mainContainer">.
+   Neutralise its table-ness so it behaves as a normal flex column. */
+#mainContainer,
+#mainContainer > tbody,
+#mainContainer > tbody > tr,
+#mainContainer > tr {
+    display: block !important;
+    width: 100% !important;
+    border: 0 !important;
+}
+#mainContainer > tbody > tr > td,
+#mainContainer > tr > td {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+a { color: var(--tw-primary); text-decoration: none; }
+a:hover { color: var(--tw-primary-d); text-decoration: underline; }
+a:active, a:visited { color: var(--tw-primary); }
+
+/* ----- Branded header ------------------------------------------------- */
+.tw-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 1px solid var(--tw-border);
+}
+.tw-brand {
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    letter-spacing: -.02em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: baseline;
+}
+.tw-brand .t { color: #c90c09; }
+.tw-brand .alent { color: #16a34a; }
+.tw-brand .w { color: #e88908; }
+.tw-brand .iz { color: var(--tw-primary); }
+.tw-brand small {
+    display: block;
+    font-size: .68rem;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--tw-muted);
+}
+.tw-welcome { font-size: .9rem; color: var(--tw-muted); }
+.tw-welcome strong { color: var(--tw-ink); }
+
+/* ----- Navbar (replaces glowtabs) ------------------------------------- */
+.navbar.tw-nav {
+    background: var(--tw-ink) !important;
+    box-shadow: var(--tw-shadow);
+}
+.tw-nav .navbar-brand,
+.tw-nav .nav-link {
+    color: #e2e8f0 !important;
+    font-weight: 500;
+}
+.tw-nav .nav-link:hover,
+.tw-nav .nav-link:focus { color: #fff !important; }
+.tw-nav .nav-link.active {
+    color: #fff !important;
+    box-shadow: inset 0 -3px 0 var(--tw-accent);
+}
+.tw-nav .dropdown-menu {
+    border: 0;
+    box-shadow: var(--tw-shadow);
+    border-radius: var(--tw-radius);
+    padding: .4rem;
+}
+.tw-nav .dropdown-item { border-radius: .5rem; padding: .5rem .75rem; }
+.tw-nav .dropdown-item:hover { background: var(--tw-bg); color: var(--tw-primary-d); }
+
+/* ----- Main content shell -------------------------------------------- */
+#containerOuter {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 1140px;
+    margin: 1.75rem auto !important;
+    background: var(--tw-card) !important;
+    border: 1px solid var(--tw-border) !important;
+    border-radius: var(--tw-radius) !important;
+    box-shadow: var(--tw-shadow);
+    overflow: hidden;
+    flex: 1 0 auto;
+}
+#containerInner {
+    width: 100% !important;
+    padding: 1.75rem !important;
+    overflow: visible !important;
+}
+
+/* ----- Page headings -------------------------------------------------- */
+.pageHeader,
+.content h1, .content h2 {
+    display: block;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: var(--tw-ink) !important;
+    text-align: center;
+    margin: .25rem 0 1.25rem !important;
+    padding-bottom: .75rem;
+    border-bottom: 2px solid var(--tw-border);
+}
+.content { width: auto !important; text-align: left; }
+
+/* ----- Legacy form controls ------------------------------------------ */
+input[type=text], input[type=email], input[type=password],
+input[type=date], input[type=number], input[type=tel], select, textarea {
+    width: auto;
+    min-width: 220px;
+    height: auto !important;
+    line-height: 1.5 !important;
+    padding: .5rem .75rem !important;
+    border: 1px solid var(--tw-border) !important;
+    border-radius: .55rem !important;
+    background: #fff !important;
+    color: var(--tw-ink) !important;
+    font-size: .95rem !important;
+    transition: border-color .15s, box-shadow .15s;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none !important;
+    border-color: var(--tw-primary) !important;
+    background: #fff !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.15) !important;
+}
+textarea { min-height: 110px; resize: vertical; }
+
+input[type=button], input[type=submit], input[type=reset], button {
+    border: 0 !important;
+    border-radius: .55rem !important;
+    background: var(--tw-primary) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: .9rem !important;
+    text-transform: none !important;
+    padding: .55rem 1.2rem !important;
+    cursor: pointer;
+    transition: background .15s, transform .05s;
+}
+input[type=submit]:hover, input[type=button]:hover, button:hover {
+    background: var(--tw-primary-d) !important;
+}
+input[type=submit]:active, input[type=button]:active, button:active { transform: translateY(1px); }
+input[type=reset] {
+    background: #e2e8f0 !important;
+    color: var(--tw-ink) !important;
+}
+input[type=reset]:hover { background: #cbd5e1 !important; }
+input[disabled], input[disabled=disabled] { opacity: .55; cursor: not-allowed; }
+
+/* ----- Legacy data tables (.tblStyle) -------------------------------- */
+.tblStyle {
+    width: 100%;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid var(--tw-border);
+    border-radius: var(--tw-radius);
+    overflow: hidden;
+    box-shadow: var(--tw-shadow);
+    font-size: .92rem;
+}
+.tblStyle th {
+    background: var(--tw-ink) !important;
+    color: #fff !important;
+    font-weight: 600;
+    text-align: left;
+    padding: .7rem .85rem !important;
+    border: 0 !important;
+}
+.tblStyle td {
+    padding: .65rem .85rem !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--tw-border) !important;
+}
+.tblStyle tr:hover td { background: #f8fafc; }
+.tblStyle tr.alt, .odd { background: #f8fafc !important; }
+.even { background: #fff !important; }
+.tblStyle tfoot td { border: 0 !important; }
+.tblStyle tfoot a {
+    background: var(--tw-primary) !important;
+    color: #fff !important;
+    border: 0 !important;
+    border-radius: .5rem;
+    padding: .35rem .9rem !important;
+    font-weight: 600;
+}
+.tblStyle tfoot a:hover { background: var(--tw-primary-d) !important; text-decoration: none; }
+
+/* legacy alpha.css table header bg image -> clean style */
+table tr th { background: var(--tw-bg) !important; padding: .6rem .75rem !important; }
+
+/* ----- Helper / status text ------------------------------------------ */
+.red, .red_error { color: var(--tw-danger) !important; }
+.green_success, .spnGreen { color: var(--tw-success) !important; }
+.bold { font-weight: 700; }
+.message { visibility: hidden; }
+
+/* Wrap legacy forms in a card-ish feel where they were boxed inline */
+.add_form, .big_form, .small_form {
+    width: 100% !important;
+    max-width: 640px;
+    margin: 0 auto !important;
+}
+
+/* ----- Footer -------------------------------------------------------- */
+.tw-footer {
+    flex-shrink: 0;
+    background: var(--tw-ink);
+    color: #cbd5e1;
+    font-size: .85rem;
+}
+.tw-footer a { color: #e2e8f0; }
+.tw-footer a:hover { color: #fff; text-decoration: underline; }
+
+/* ----- Responsiveness ------------------------------------------------- */
+@media (max-width: 768px) {
+    #containerOuter { margin: 1rem .75rem !important; }
+    #containerInner { padding: 1.1rem !important; }
+    .tblStyle { display: block; overflow-x: auto; white-space: nowrap; }
+    input, select, textarea { min-width: 0; width: 100%; }
+}

@@ -1,0 +1,5 @@
+[Sat Jun 20 18:00:26.751777 2026] [mpm_winnt:notice] [pid 20476:tid 528] AH00455: Apache/2.4.2 (Win64) PHP/5.4.3 configured -- resuming normal operations
+[Sat Jun 20 18:00:26.752778 2026] [mpm_winnt:notice] [pid 20476:tid 528] AH00456: Server built: May 13 2012 19:54:49
+[Sat Jun 20 18:00:26.752778 2026] [core:notice] [pid 20476:tid 528] AH00094: Command line: 'C:\\wamp\\bin\\apache\\apache2.4.2\\bin\\httpd.exe -d C:/wamp/bin/apache/apache2.4.2 -f d:/practice/VSCode/CollegeProject/TalentWiz_modernized/run-apache.conf -D FOREGROUND'
+[Sat Jun 20 18:00:26.757778 2026] [mpm_winnt:notice] [pid 20476:tid 528] AH00418: Parent: Created child process 21960
+[Sat Jun 20 18:00:27.109009 2026] [mpm_winnt:notice] [pid 21960:tid 820] AH00354: Child: Starting 64 worker threads.

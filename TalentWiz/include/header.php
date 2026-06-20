@@ -1,112 +1,72 @@
 <?php
 include_once 'settings.php';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>TalentWiz</title>
-        <script src="<?php echo URL ?>scripts/jquery.min.js" type="text/javascript"></script>
-        <link href="<?php echo URL ?>css/dropdowntab/glowtabs.css" rel="stylesheet" type="text/css" />
-        <script src="<?php echo URL ?>scripts/dropdowntab/dropdowntabs.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                tabdropdown.init("glowmenu", "auto")
-            });
-        </script>
-        <link href="<?php echo URL ?>css/siteStyle.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo URL ?>css/alpha.css" rel="stylesheet" type="text/css" />
 
-        <link rel="stylesheet" type="text/css" media="all" href="<?php echo URL ?>/scripts/calender/jsDatePick_ltr.min.css" />
-        <script type="text/javascript" src="<?php echo URL ?>/scripts/calender/jsDatePick.min.1.3.js"></script>
+        <!-- Modern UI framework: Bootstrap 5 (vendored locally so it never depends
+             on CDN reachability / SRI in the browser) + Inter font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="<?php echo URL ?>css/bootstrap.min.css?v=2" rel="stylesheet" type="text/css">
 
-        <link rel="stylesheet" href="<?php echo URL ?>scripts/steps/demo/css/normalize.css"></link>
-        <link rel="stylesheet" href="<?php echo URL ?>scripts/steps/demo/css/main.css" ></link>
-        <link rel="stylesheet" href="<?php echo URL ?>scripts/steps/demo/css/jquery.steps.css" ></link>
-        <script src="<?php echo URL ?>scripts/steps/lib/modernizr-2.6.2.min.js"></script>
-        <script src="<?php echo URL ?>scripts/steps/lib/jquery-1.9.1.min.js"></script>
+        <!-- jQuery upgraded 1.2.6 (2008) -> 3.7.1 so it's compatible with Bootstrap 5
+             (the old version crashed Bootstrap: "n.Event is not a function").
+             jQuery Migrate restores APIs the legacy pages relied on. The original
+             1.2.6 is preserved at scripts/jquery-1.2.6-legacy.min.js. -->
+        <script src="<?php echo URL ?>scripts/jquery-3.7.1.min.js" type="text/javascript"></script>
+        <script src="<?php echo URL ?>scripts/jquery-migrate-3.4.1.min.js" type="text/javascript"></script>
+
+        <!-- Legacy date picker & wizard styles still used by some pages -->
+        <link rel="stylesheet" type="text/css" media="all" href="<?php echo URL ?>scripts/calender/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="<?php echo URL ?>scripts/calender/jsDatePick.min.1.3.js"></script>
+        <link rel="stylesheet" href="<?php echo URL ?>scripts/steps/demo/css/jquery.steps.css" />
         <script src="<?php echo URL ?>scripts/steps/lib/jquery.cookie-1.3.1.js"></script>
         <script src="<?php echo URL ?>scripts/steps/build/jquery.steps.js"></script>
-    </head>        
+
+        <!-- Legacy + modern theme layer (modern.css overrides the old look).
+             ?v= cache-buster: bump when these files change so browsers reload them. -->
+        <link href="<?php echo URL ?>css/siteStyle.css?v=2" rel="stylesheet" type="text/css" />
+        <link href="<?php echo URL ?>css/modern.css?v=2" rel="stylesheet" type="text/css" />
+    </head>
     <body>
-        <table id="mainContainer" style="width: 100%;
-               border-collapse: collapse;">
-            <tr>
-                <td >
-                    <div id="header">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-                                <td style="width: 120px;">&nbsp;
-
-                                </td>
-                                <td align="left" valign="bottom" style="font-family: Arial,Sans-Serif,Serif, Verdana,Monospace;
-                                    font-size: 75px; line-height: 100px; width: 400px;">
-                                    <span><span style="color: #c90c09;">T</span><span style="color: #31a913;">alent</span>
-                                        <span style="color: #e88908;">W</span><span style="color: #1369f2;">iz</span>
-                                    </span>
-                                </td>
-                                <td align="right" valign="bottom">
-                                    <label id="lblMessage">
-                                        Welcome 
-                                        <?php
-                                        if (isset($_SESSION["userid"])) {
-                                            echo ucfirst($_SESSION['userid']);
-                                            ?> !!!
-                                            <a href="<?php echo URL ?>logout.php">Sign Out</a>
-                                            <?php
-                                        } else {
-                                            echo "Guest";
-                                            ?> !!!
-                                            <a href="<?php echo URL ?>guest/login.php">Sign In</a>
-                                        <?php } ?>
-                                    </label>
-                                </td>
-                                <td style="width: 20px;">&nbsp;
-
-                                </td>
-                            </tr>
-                        </table>
+        <div id="mainContainer">
+            <!-- Branded header -->
+            <header class="tw-header py-3">
+                <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <a href="<?php echo URL ?>" class="tw-brand text-decoration-none">
+                        <span><span class="t">T</span><span class="alent">alent</span><span class="w">W</span><span class="iz">iz</span></span>
+                    </a>
+                    <div class="tw-welcome text-end">
+                        <?php if (isset($_SESSION["userid"])) { ?>
+                            Welcome, <strong><?php echo ucfirst($_SESSION['userid']); ?></strong>
+                            &nbsp;<a class="btn btn-sm btn-outline-secondary" href="<?php echo URL ?>logout.php">Sign Out</a>
+                        <?php } else { ?>
+                            Welcome, <strong>Guest</strong>
+                            &nbsp;<a class="btn btn-sm btn-primary" href="<?php echo URL ?>guest/login.php">Sign In</a>
+                        <?php } ?>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </header>
 
-            <?php
-            if (isset($_SESSION["usertype"]) && ($_SESSION["usertype"] == "admin" || $_SESSION["usertype"] == "operator")) {
-                ?>
-                <tr>
-                    <td style="background-image: url('<?php echo URL; ?>images/headerbg.png'); background-repeat: repeat-x;
-                        background-position: center center;">
-                        <table style="margin: 0 auto; border-collapse: collapse; width: 980px;">
-                            <tr>
-                                <td align="left">
-                                    <img id="logoImage" alt="" src="<?php echo URL; ?>images/header.png" align="left" hspace="0" vspace="0"
-                                         style="width: 375px; height: 38px;" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <?php
-            } else {
-                ?>
-                <tr>
-                    <td style="background-image: url('<?php echo URL; ?>images/headerbg.png'); background-repeat: repeat-x;
-                        background-position: center center;">
-                        <br />
-                    </td>
-                </tr>
-            <?php } ?>
-            <tr>
-                <td id="BlueLine">
-                </td>
-            </tr>
-            <tr>
-                <td id="headerMenuBack">
-                    <div id="headerMenuContainer">
+            <!-- Primary navigation -->
+            <nav class="navbar navbar-expand-lg tw-nav">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#twMainNav" aria-controls="twMainNav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="twMainNav">
                         <?php include_once 'topmenu.php'; ?>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="containerOuter">
-                        <div id="containerInner">
+                </div>
+            </nav>
+
+            <!-- Page content shell (pages render into #containerInner; footer closes these) -->
+            <div id="containerOuter">
+                <div id="containerInner">
